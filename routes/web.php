@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'adsController@index');
+
+Route::get('/ad/{id}', 'adsController@details' );
