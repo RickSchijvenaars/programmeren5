@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', 'adsController@index');
+Route::get('/', 'PhotosController@home');
 
-Route::get('/ad/{id}', 'adsController@details' );
+Route::get('/photos', 'PhotosController@index');
+
+Route::get('/upload', 'PhotosController@upload' );
+Route::post('/photos', 'PhotosController@store' );
+
+Route::get('/photos/{id}', 'PhotosController@details' );
