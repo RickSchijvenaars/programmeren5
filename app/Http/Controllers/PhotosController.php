@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PhotosController extends Controller
@@ -11,11 +12,19 @@ class PhotosController extends Controller
         return view('home', compact('title'));
     }
 
-    public function index(){
+    public function index(Request $request){
         $title = "Frickr | Photos";
-        $photos = DB::table('photos')->orderBy('created_at', 'asc')->get();
+        $category = $request->get('category', 'All');
 
-        return view('photos.index', compact('photos', 'title'));
+        if($category == 'All'){
+            $photos = DB::table('photos')->orderBy('created_at', 'asc')->get();
+        }else{
+            $photos = DB::table('photos')->where('category', $category)->orderBy('created_at', 'asc')->get();
+        }
+
+        $categories = DB::table('categories')->get();
+
+        return view('photos.index', compact('categories', 'photos', 'title'));
     }
 
     public function details($id){
@@ -27,20 +36,28 @@ class PhotosController extends Controller
 
     public function upload(){
         $title = 'Frickr | Upload';
-        return view('photos.upload', compact('title'));
+        $categories = DB::table('categories')->get();
+
+        return view('photos.upload', compact('categories', 'title'));
     }
 
     public function store(){
+
+        $this->validate(request(), [
+            'title' => 'required',
+            'description' => 'required',
+            'source' => 'required|image',
+            'category' => 'required|exists:categories,name'
+        ]);
+
         DB::table('photos')->insert(
             [   'name' => request('title'),
                 'description' => request('description'),
-                'source' => request('source')
+                'source' => request('source'),
+                'category' => request('category')
             ]
         );
-
-        $title = "Frickr | Photos";
-        $photos = DB::table('photos')->orderBy('created_at', 'asc')->get();
-        return view('photos.index', compact('title', 'photos'));
+        return redirect()->action('PhotosController@index');
     }
 }
 
