@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,26 +19,26 @@ class PhotosController extends Controller
         $category = $request->get('category', 'All');
 
         if($category == 'All'){
-            $photos = DB::table('photos')->orderBy('created_at', 'asc')->get();
+            $photos = Photo::latest()->get();
         }else{
-            $photos = DB::table('photos')->where('category', $category)->orderBy('created_at', 'asc')->get();
+            $photos = Photo::where('category', $category)->latest()->get();
         }
 
-        $categories = DB::table('categories')->get();
+        $categories = Category::all();
 
         return view('photos.index', compact('categories', 'photos', 'title'));
     }
 
-    public function details($id){
-        $photo= DB::table('photos')->where('id',$id)->first();
-        $title = $photo->name;
+    public function details($photo){
+        $currentphoto = Photo::where('id',$photo)->first();
+        $title = $currentphoto->name;
 
-        return view('photos.photodetails', compact('photo', 'title'));
+        return view('photos.photodetails', compact('currentphoto', 'title'));
     }
 
     public function upload(){
         $title = 'Frickr | Upload';
-        $categories = DB::table('categories')->get();
+        $categories = Category::all();
 
         return view('photos.upload', compact('categories', 'title'));
     }
@@ -46,15 +48,16 @@ class PhotosController extends Controller
         $this->validate(request(), [
             'title' => 'required',
             'description' => 'required',
-            'source' => 'required|image',
+/*            'source' => 'required|image',*/
             'category' => 'required|exists:categories,name'
         ]);
 
-        DB::table('photos')->insert(
+        Photo::insert(
             [   'name' => request('title'),
                 'description' => request('description'),
-                'source' => request('source'),
-                'category' => request('category')
+/*                'source' => request('source'),*/
+                'category' => request('category'),
+                'created_at' => NOW(),
             ]
         );
         return redirect()->action('PhotosController@index');
