@@ -7,7 +7,7 @@
 
             <hr>
 
-            <form method="POST" action="/photos">
+            <form method="POST" action="{{action('PhotosController@index')}}">
                 {{ csrf_field() }}
 
                 <div class="form-group">

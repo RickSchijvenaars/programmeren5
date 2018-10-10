@@ -36,7 +36,7 @@
         <hr>
 
         <div class="container">
-            <form method="POST" action="/photos/{{$currentphoto->id}}/comments">
+            <form method="POST" action="{{action('CommentsController@store', ['photo' => $currentphoto->id])}}">
                 {{csrf_field()}}
                 <div class="form-group">
                     <strong><label>Your comment:</label></strong>
