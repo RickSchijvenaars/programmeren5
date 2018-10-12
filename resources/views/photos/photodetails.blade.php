@@ -35,24 +35,42 @@
 
         <hr>
 
-        <div class="container">
-            <form method="POST" action="{{action('CommentsController@store', ['photo' => $currentphoto->id])}}">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <strong><label>Your comment:</label></strong>
-                    <textarea name="body" class="form-control" style="max-width: 500px;" required></textarea>
-                </div>
+        @guest
+            <div class="container">
+                <form>
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <strong><label>You have to be logged in to post a comment.</label></strong>
+                        <textarea name="body" class="form-control" style="max-width: 500px;"  disabled></textarea>
+                    </div>
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" disabled>Add</button>
 
-                </div>
+                    </div>
 
-            </form>
+                </form>
+            </div>
+        @else
+            <div class="container">
+                <form method="POST" action="{{action('CommentsController@store', ['photo' => $currentphoto->id])}}">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <strong><label>Your comment:</label></strong>
+                        <textarea name="body" class="form-control" style="max-width: 500px;" required></textarea>
+                    </div>
 
-            @include('layouts.errors')
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Add</button>
 
-        </div>
+                    </div>
+
+                </form>
+
+                @include('layouts.errors')
+
+            </div>
+        @endguest
 
     </div>
 @endsection

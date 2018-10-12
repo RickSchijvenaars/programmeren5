@@ -37,9 +37,10 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    public function showResetForm()
+    public function showResetForm($code)
     {
         $title = 'Reset';
-        return view('auth.passwords.reset', compact('title'));
+        $token = $code;
+        return view('auth.passwords.reset', compact('token', 'title'));
     }
 }

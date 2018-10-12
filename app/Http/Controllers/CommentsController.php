@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Photo;
 use App\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentsController extends Controller
 {
@@ -17,7 +18,7 @@ class CommentsController extends Controller
 
         Comment::create([
             'body' => request('body'),
-            'user_id' => "0",
+            'user_id' => Auth::id(),
             'photo_id' => $photo->id,
         ]);
 

@@ -6,14 +6,10 @@ use App\Photo;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PhotosController extends Controller
 {
-    public function home(){
-        $title = "Frickr";
-        return view('home', compact('title'));
-    }
-
     public function index(Request $request){
         $title = "Frickr | Photos";
         $category = $request->get('category', 'All');
@@ -44,7 +40,6 @@ class PhotosController extends Controller
     }
 
     public function store(){
-
         $this->validate(request(), [
             'title' => 'required',
             'description' => 'required',
@@ -55,6 +50,7 @@ class PhotosController extends Controller
         Photo::insert(
             [   'name' => request('title'),
                 'description' => request('description'),
+                'user_id' => Auth::id(),
 /*                'source' => request('source'),*/
                 'category' => request('category'),
                 'created_at' => NOW(),
