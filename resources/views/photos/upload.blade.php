@@ -7,7 +7,7 @@
 
             <hr>
 
-            <form method="POST" action="{{action('PhotosController@index')}}">
+            <form method="POST" action="{{ route('photos') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group">

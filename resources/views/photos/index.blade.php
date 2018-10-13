@@ -19,7 +19,7 @@
                 <div class="card mb-4 shadow-sm">
                     <img class="card-img-top" data-src="{{$photo->source}}" alt="Photo">
                     <div class="card-body">
-                        <a class="card-title" href="{{action('PhotosController@details', ['photo' => $photo->id])}}">{{$photo->name}}</a>
+                        <a class="card-title" href="{{ route('details', ['photo' => $photo->id])}}">{{$photo->name}}</a>
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">{{ $photo->created_at->toFormattedDateString()  }}</small>
                             <small class="text-muted">{{ $photo->user->name  }}</small>

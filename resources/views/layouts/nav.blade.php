@@ -1,6 +1,6 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ action('HomeController@index') }}">
+                <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
                     <strong>Frickr</strong>
                 </a>
@@ -12,10 +12,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ action('PhotosController@index') }}">Photos</a>
+                            <a class="nav-link" href="{{ route('photos') }}">Album</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ action('PhotosController@upload') }}">Upload</a>
+                            <a class="nav-link" href="{{ route('upload') }}">Upload</a>
                         </li>
                     </ul>
 
@@ -36,6 +36,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('userprofile') }}">
+                                        Profile
+                                    </a>
+                                    @if (Auth::user()->type == 'admin') {{--??--}}
+                                        <a class="dropdown-item" href="{{ route('adminpanel') }}">
+                                            Adminpanel
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -44,9 +52,6 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
-                                    <a class="dropdown-item" href="{{ action('UserController@profile') }}">
-                                        Profile
-                                    </a>
                                 </div>
                             </li>
                         @endguest

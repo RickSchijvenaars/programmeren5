@@ -59,7 +59,7 @@
             </div>
         @else
             <div class="container">
-                <form method="POST" action="{{action('CommentsController@store', ['photo' => $currentphoto->id])}}">
+                <form method="POST" action="{{ route('comment', ['photo' => $currentphoto->id])}}">
                     {{csrf_field()}}
                     <div class="form-group">
                         <strong><label>Your comment:</label></strong>
