@@ -43,4 +43,13 @@ class LoginController extends Controller
         $title = 'Login';
         return view('auth.login', compact('title'));
     }
+
+    /*public function username()
+    {
+        $identity  = request()->get('email');
+        $fieldName = filter_var($identity, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        request()->merge([$fieldName => $identity]);
+        return $fieldName;
+    }*/
+
 }

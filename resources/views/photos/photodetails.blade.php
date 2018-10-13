@@ -3,19 +3,25 @@
 @section('content')
     <div class="py-5 bg-light">
         <div class="jumbotron">
-            <h1>{{$currentphoto->name}}</h1>
+            <div style="min-height: 400px; width: 100%; border: 1px solid black;">{{$currentphoto->source}}</div>
+            <h1 style="margin-top:20px;">{{$currentphoto->name}}</h1>
+            <p class="text-muted">
+                <i>
+                    By <b>{{$currentphoto->user->name}}</b> | {{ $currentphoto->created_at->toFormattedDateString()  }}
+                </i>
+            </p>
             <p>{{$currentphoto->description}}</p>
         </div>
 
         <hr>
-
         <div class="container">
-            @foreach ($currentphoto->comments as $comment)
+            <h3>Comments:</h3>
+        @foreach ($currentphoto->comments as $comment)
                 <div class="row">
                 <div class="col">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <strong>Username</strong> <span class="text-muted">{{$comment->created_at->diffForHumans()}}:</span>
+                            <strong>{{$comment->user->name}}</strong><span class="text-muted"> | {{$comment->created_at->diffForHumans()}}:</span>
                         </div>
                         <div class="panel-body">
                             {{$comment->body}}

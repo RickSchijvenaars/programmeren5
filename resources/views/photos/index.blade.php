@@ -22,6 +22,7 @@
                         <a class="card-title" href="{{action('PhotosController@details', ['photo' => $photo->id])}}">{{$photo->name}}</a>
                         <div class="d-flex justify-content-between align-items-center">
                             <small class="text-muted">{{ $photo->created_at->toFormattedDateString()  }}</small>
+                            <small class="text-muted">{{ $photo->user->name  }}</small>
                         </div>
                     </div>
                 </div>

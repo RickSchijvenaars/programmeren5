@@ -11,4 +11,8 @@ Route::get('/photos/{photo}', 'PhotosController@details' );
 
 Route::post('/photos/{photo}/comments', 'CommentsController@store' );
 
+Route::get('/profile', 'UserController@profile')->middleware('auth');
+
+Route::get('/admin', 'AdminController@index')->middleware('admin');
+
 Auth::routes();
