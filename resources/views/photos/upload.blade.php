@@ -7,7 +7,7 @@
 
             <hr>
 
-            <form method="POST" action="{{ route('photos') }}">
+            <form method="POST" action="{{ route('store') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="form-group">
@@ -27,11 +27,11 @@
                 </select>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Photo upload</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="source" >
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file" >
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Upload</button>
+                    <button type="submit" name="upload" class="btn btn-primary">Upload</button>
                 </div>
 
                 @include('layouts.errors')

@@ -39,19 +39,33 @@ class PhotosController extends Controller
         return view('photos.upload', compact('categories', 'title'));
     }
 
-    public function store(){
-        $this->validate(request(), [
+    public function store(Request $request){
+        $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-/*            'source' => 'required|image',*/
+           //'file' => 'max:8048',
             'category' => 'required|exists:categories,name'
         ]);
+
+
+//dd($request->all());
+//dd($request->hasFile("file"));
+
+        /*if($request->hasFile('file')){
+            $request->file("file")->store('public/photos');
+        }else{
+            return "fail";
+        }*/
+
+        $photo = $request->file('file');
+        $new_name = rand() . '.' . $photo->getClientOriginalExtension();
+        $photo->move(public_path("photos"), $new_name);
 
         Photo::insert(
             [   'name' => request('title'),
                 'description' => request('description'),
                 'user_id' => Auth::id(),
-/*                'source' => request('source'),*/
+                'source' => $new_name,
                 'category' => request('category'),
                 'created_at' => NOW(),
             ]

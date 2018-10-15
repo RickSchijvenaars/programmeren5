@@ -17,7 +17,7 @@
         @foreach($photos as $photo )
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" data-src="{{$photo->source}}" alt="Photo">
+                    <img class="card-img-top" src="/photos/{{$photo->source}}" alt="Photo">
                     <div class="card-body">
                         <a class="card-title" href="{{ route('details', ['photo' => $photo->id])}}">{{$photo->name}}</a>
                         <div class="d-flex justify-content-between align-items-center">

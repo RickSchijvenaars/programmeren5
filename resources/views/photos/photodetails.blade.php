@@ -3,7 +3,7 @@
 @section('content')
     <div class="py-5 bg-light">
         <div class="jumbotron">
-            <div style="min-height: 400px; width: 100%; border: 1px solid black;">{{$currentphoto->source}}</div>
+            <img class="card-img-top" src="/photos/{{$currentphoto->source}}" alt="Photo">
             <h1 style="margin-top:20px;">{{$currentphoto->name}}</h1>
             <p class="text-muted">
                 <i>

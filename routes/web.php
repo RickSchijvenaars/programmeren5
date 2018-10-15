@@ -5,7 +5,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/album', 'PhotosController@index')->name('photos');
 
 Route::get('/upload', 'PhotosController@upload' )->middleware('auth')->name('upload');
-Route::post('/photos', 'PhotosController@store' );
+Route::post('/store', 'PhotosController@store' )->middleware('auth')->name('store');
 
 Route::get('/photos/{photo}', 'PhotosController@details' )->name('details');
 
