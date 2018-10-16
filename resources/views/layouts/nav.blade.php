@@ -12,7 +12,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('photos') }}">Album</a>
+                            <a class="nav-link" href="{{ route('gallery') }}">Gallery</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('upload') }}">Upload</a>

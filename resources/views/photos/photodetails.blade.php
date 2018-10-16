@@ -2,15 +2,19 @@
 
 @section('content')
     <div class="py-5 bg-light">
-        <div class="jumbotron">
-            <img class="card-img-top" src="/photos/{{$currentphoto->source}}" alt="Photo">
-            <h1 style="margin-top:20px;">{{$currentphoto->name}}</h1>
-            <p class="text-muted">
-                <i>
-                    By <b>{{$currentphoto->user->name}}</b> | {{ $currentphoto->created_at->toFormattedDateString()  }}
-                </i>
-            </p>
-            <p>{{$currentphoto->description}}</p>
+        <div class="jumbotron container" style="flex-wrap: wrap;display:flex;">
+            <div>
+                <img class=" bigphotocontainer" src="/photos/{{$currentphoto->source}} ">
+            </div>
+
+            <div class="photoparagraph">
+                <h1 style="margin-top:20px;">{{$currentphoto->name}}</h1>
+                <p class="text-muted">
+                    <i>By <b>{{$currentphoto->user->name}}</b> | {{ $currentphoto->created_at->toFormattedDateString()  }}</i>
+                </p>
+                <p>{{$currentphoto->description}}</p>
+            </div>
+
         </div>
 
         <hr>
@@ -29,13 +33,6 @@
                     </div>
                 </div>
                 </div>
-                {{--<hr>
-                <article>
-                    <strong>
-                        {{$comment->created_at->diffForHumans()}}:
-                    </strong>
-                    {{$comment->body}}
-                </article>--}}
             @endforeach
         </div>
 

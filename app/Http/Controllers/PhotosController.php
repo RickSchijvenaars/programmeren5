@@ -70,7 +70,7 @@ class PhotosController extends Controller
                 'created_at' => NOW(),
             ]
         );
-        return redirect()->action('PhotosController@index');
+        return redirect()->route('gallery');
     }
 }
 

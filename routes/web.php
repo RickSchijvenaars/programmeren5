@@ -2,7 +2,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/album', 'PhotosController@index')->name('photos');
+Route::get('/gallery', 'PhotosController@index')->name('gallery');
 
 Route::get('/upload', 'PhotosController@upload' )->middleware('auth')->name('upload');
 Route::post('/store', 'PhotosController@store' )->middleware('auth')->name('store');

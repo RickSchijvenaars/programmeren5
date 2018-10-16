@@ -12,20 +12,24 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
     </div>
-    <div class="row jumbotron">
+    <div class="row">
 
         @foreach($photos as $photo )
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src="/photos/{{$photo->source}}" alt="Photo">
-                    <div class="card-body">
-                        <a class="card-title" href="{{ route('details', ['photo' => $photo->id])}}">{{$photo->name}}</a>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-muted">{{ $photo->created_at->toFormattedDateString()  }}</small>
-                            <small class="text-muted">{{ $photo->user->name  }}</small>
+            <div class="col-md-3">
+                <a href="{{ route('details', ['photo' => $photo->id])}}">
+                    <div class="card photocard shadow-sm smallphotocontainer" style="background-image:url('/photos/{{$photo->source}}');">
+{{--
+                        <img class="card-img-top" src="/photos/{{$photo->source}}" alt="Photo">
+--}}
+                        <div class="card-body card-info">
+                            <span class="card-title photocard-title">{{$photo->name}}</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ $photo->created_at->toFormattedDateString()  }}</small>
+                                <small class="text-muted">{{ $photo->user->name  }}</small>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         @endforeach
 
