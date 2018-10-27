@@ -23,19 +23,13 @@ class UserController extends Controller
     {
         $user = Auth::user();
 
-        if (Auth::user()->email == request('email')) {
-            $this->validate(request(), [
-                //'email' => 'required|email|unique:users',
-                'password' => 'required|min:6|confirmed'
-            ]);
-        } else {
-            $this->validate(request(), [
-                'email' => 'required|email|unique:users',
-                'password' => 'required|min:6|confirmed'
-            ]);
-        }
+        $this->validate(request(), [
+            'name' => 'required|unique:users,name,'.$user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'password' => 'required|min:6|confirmed'
+        ]);
 
-        $user->name = Auth::user()->name;
+        $user->name = request('name');
         $user->email = request('email');
         $user->password = bcrypt(request('password'));
 

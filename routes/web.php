@@ -15,8 +15,10 @@ Route::get('/profile', 'UserController@profile')->middleware('auth')->name('user
 Route::post('/profile', 'UserController@edit' )->middleware('auth')->name('edituser');
 
 Route::get('/admin', 'AdminController@index')->middleware('admin')->name('adminpanel');
-Route::post('/admin/update/{user}', 'AdminController@userUpdate')->middleware('admin')->name('userupdate');
-Route::post('/admin/update/{photo}', 'AdminController@photoUpdate')->middleware('admin')->name('photoupdate');
+
+Route::get('/admin/edit', 'AdminController@edit')->middleware('admin')->name('adminedit');
+Route::post('/admin/update/user/{user}', 'AdminController@userUpdate')->middleware('admin')->name('userupdate');
+Route::post('/admin/update/photo/{photo}', 'AdminController@photoUpdate')->middleware('admin')->name('photoupdate');
 
 
 Auth::routes();

@@ -16,8 +16,11 @@
 
         @foreach($photos as $photo )
             <div class="col-md-3">
-                <a href="{{ route('details', ['photo' => $photo->id])}}">
+                <a style="text-decoration: none;" href="{{ route('details', ['photo' => $photo->id])}}">
                     <div class="card photocard shadow-sm smallphotocontainer" style="background-image:url('/photos/{{$photo->source}}');">
+                        @if (Auth::user() && Auth::user()->type == 'admin')
+                        <span class="photoid">{{$photo->id}}</span>
+                        @endif
 {{--
                         <img class="card-img-top" src="/photos/{{$photo->source}}" alt="Photo">
 --}}

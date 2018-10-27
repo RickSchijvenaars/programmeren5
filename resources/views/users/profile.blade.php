@@ -7,7 +7,7 @@
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control smallinput" name="name" placeholder="{{Auth::user()->name}}" disabled>
+                <input type="text" class="form-control smallinput" name="name" value="{{Auth::user()->name}}">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

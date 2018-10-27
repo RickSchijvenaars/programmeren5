@@ -47,16 +47,6 @@ class PhotosController extends Controller
             'category' => 'required|exists:categories,name'
         ]);
 
-
-//dd($request->all());
-//dd($request->hasFile("file"));
-
-        /*if($request->hasFile('file')){
-            $request->file("file")->store('public/photos');
-        }else{
-            return "fail";
-        }*/
-
         $photo = $request->file('file');
         $new_name = rand() . '.' . $photo->getClientOriginalExtension();
         $photo->move(public_path("photos"), $new_name);

@@ -13,7 +13,14 @@
                     <i>By <b>{{$currentphoto->user->name}}</b> | {{ $currentphoto->created_at->toFormattedDateString()  }}</i>
                 </p>
                 <p>{{$currentphoto->description}}</p>
+
+                @if (Auth::user() && Auth::user()->type == 'admin')
+                    <a class="btn-primary btn" href="{{ route('adminedit', 'photo='.$currentphoto->id) }}">Edit</a> {{--??--}}
+                @endif
+
             </div>
+
+
 
         </div>
 
@@ -22,16 +29,16 @@
             <h3>Comments:</h3>
         @foreach ($currentphoto->comments as $comment)
                 <div class="row">
-                <div class="col">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <strong>{{$comment->user->name}}</strong><span class="text-muted"> | {{$comment->created_at->diffForHumans()}}:</span>
-                        </div>
-                        <div class="panel-body">
-                            {{$comment->body}}
+                    <div class="col">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>{{$comment->user->name}}</strong><span class="text-muted"> | {{$comment->created_at->diffForHumans()}}:</span>
+                            </div>
+                            <div class="panel-body">
+                                {{$comment->body}}
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             @endforeach
         </div>
