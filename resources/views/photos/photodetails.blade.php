@@ -15,7 +15,10 @@
                 <p>{{$currentphoto->description}}</p>
 
                 @if (Auth::user() && Auth::user()->type == 'admin')
-                    <a class="btn-primary btn" href="{{ route('adminedit', 'photo='.$currentphoto->id) }}">Edit</a> {{--??--}}
+                    <form method="POST" action="{{ route('admineditphoto', [ 'id' => $currentphoto->id])}}">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn-primary btn">Edit</button>
+                    </form>
                 @endif
 
             </div>
@@ -33,6 +36,11 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <strong>{{$comment->user->name}}</strong><span class="text-muted"> | {{$comment->created_at->diffForHumans()}}:</span>
+                                @auth
+                                    @if(Auth::id() == $comment->user_id OR Auth::user()->type == 'admin')
+                                        <span class="float-right"><a class="deletecomment" href="{{ route('deletecomment', ['id' => $comment->id]) }}">Delete</a></span>
+                                    @endif
+                                @endauth
                             </div>
                             <div class="panel-body">
                                 {{$comment->body}}

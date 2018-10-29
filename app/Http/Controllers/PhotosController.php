@@ -12,12 +12,14 @@ class PhotosController extends Controller
 {
     public function index(Request $request){
         $title = "Frickr | Photos";
-        $category = $request->get('category', 'All');
+        $select = $request->get('category', 'All');
 
-        if($category == 'All'){
+        $category = Category::where('name', $select)->first();
+
+        if($select== 'All'){
             $photos = Photo::latest()->get();
         }else{
-            $photos = Photo::where('category', $category)->latest()->get();
+            $photos = Photo::where('category_id', $category->id)->latest()->get();
         }
 
         $categories = Category::all();
@@ -51,12 +53,14 @@ class PhotosController extends Controller
         $new_name = rand() . '.' . $photo->getClientOriginalExtension();
         $photo->move(public_path("photos"), $new_name);
 
+        $category = Category::where('name', request('category'))->first();
+
         Photo::insert(
             [   'name' => request('title'),
                 'description' => request('description'),
                 'user_id' => Auth::id(),
                 'source' => $new_name,
-                'category' => request('category'),
+                'category_id' => $category->id,
                 'created_at' => NOW(),
             ]
         );
