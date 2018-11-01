@@ -2,29 +2,6 @@
 
 @section('content')
     <div class="jumbotron">
-        {{--<form method="GET">
-            <div class="form-group">
-                <label for="user">Users:</label>
-                <select class="form-control selectcategory smallinput" id="exampleFormControlSelect1" name="user">
-                    @foreach($users as $selectuser )
-                        <option>{{$selectuser->name}}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-primary">Go</button>
-            </div>
-        </form>
-
-        <form method="GET">
-            <div class="form-group">
-                <label for="photo">Photos:</label>
-                <select class="form-control selectcategory smallinput" id="exampleFormControlSelect1" name="photo">
-                    @foreach($photos as $selectphoto )
-                        <option>{{$selectphoto->id}}</option>
-                    @endforeach
-                </select>
-                <button type="submit" class="btn btn-primary">Go</button>
-            </div>
-        </form>--}}
 
     <form method="GET">
         <select class="form-control selectcategory smallinput" id="exampleFormControlSelect1" name="edit">

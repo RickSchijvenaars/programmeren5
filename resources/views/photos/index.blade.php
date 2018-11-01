@@ -2,15 +2,25 @@
 
 @section('content')
     <div class="row justify-content-end">
-    <form method="GET" style="float:right;">
-        <select class="form-control selectcategory smallinput" id="exampleFormControlSelect1" name="category">
-            <option>All</option>
-            @foreach($categories as $category )
-                <option>{{$category->name}}</option>
-            @endforeach
-        </select>
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
+        <form method="GET" style="float:right;" class="mr-3">
+            <div class="form-group">
+                <select onChange="this.form.submit()" class="form-control smallinput" id="categorySearch" name="category">
+                    <option>Category..</option>
+                    <option>All</option>
+                    @foreach($categories as $category )
+                        <option>{{$category->name}}</option>
+                    @endforeach
+                    @include('layouts.errors')
+                </select>
+            </div>
+        </form>
+
+        <form method="GET" style="float:right;">
+            <div class="form-group">
+                <input type="text" class="mr-1 form-control smallinput d-inline-block" name="search" id="freeSearch" placeholder="Search">
+                <button type="submit" class="btn-primary btn float-right">Go</button>
+            </div>
+        </form>
     </div>
     <div class="row">
 
@@ -21,9 +31,7 @@
                         @if (Auth::user() && Auth::user()->type == 'admin')
                         <span class="photoid">{{$photo->id}}</span>
                         @endif
-{{--
-                        <img class="card-img-top" src="/photos/{{$photo->source}}" alt="Photo">
---}}
+{{----}}
                         <div class="card-body card-info">
                             <span class="card-title photocard-title">{{$photo->name}}</span>
                             <div class="d-flex justify-content-between align-items-center">

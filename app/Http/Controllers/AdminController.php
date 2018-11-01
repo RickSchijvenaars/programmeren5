@@ -20,7 +20,7 @@ class AdminController extends Controller
     {
         $title = "Admin Dashboard";
         $users = User::All();
-        $photos = Photo::All();
+        $photos = Photo::with('user')->get();
         $categories = Category::All();
 
         return view('users.admin.admindashboard', compact('title', 'users', 'photos', 'categories'));
@@ -40,7 +40,7 @@ class AdminController extends Controller
         $title = "Edit photo";
 
         $categories = Category::All();
-        $photo =  Photo::where('id', $id)->first();
+        $photo =  Photo::with('category')->where('id', $id)->first();
 
         return view('users.admin.admineditphoto', compact('title', 'photo', 'categories'));
     }
