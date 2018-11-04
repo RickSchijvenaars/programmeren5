@@ -88,7 +88,7 @@
             <ul>
                 @foreach($categories as $category )
                     <li class="lead text-muted">
-                        <b>{{$category->name}}</b>
+                        <b>{{$category->name}}</b> (<b>{{$category->amount_photos}}</b>)
                         <form method="POST" action="{{ route('deletecategory', ['id' => $category->id])}}" class="float-right">
                             {{ csrf_field() }}
                             <button type="submit" class="btn-primary btn float-right bg-danger border-danger adminbtn">Delete</button>

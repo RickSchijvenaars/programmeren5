@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use App\User;
 use App\Photo;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,10 @@ class AdminController extends Controller
         $title = "Admin Dashboard";
         $users = User::All();
         $photos = Photo::with('user')->get();
-        $categories = Category::All();
+        $categories = Category::leftjoin('photos','categories.id', '=', 'photos.category_id')
+                        ->select('categories.*', DB::raw('COUNT(photos.id) as amount_photos'))
+                        ->groupBy('categories.id')
+                        ->get();
 
         return view('users.admin.admindashboard', compact('title', 'users', 'photos', 'categories'));
     }
@@ -124,7 +128,7 @@ class AdminController extends Controller
 
     public function deletePhoto($id){
         Photo::where('id', $id)->delete();
-        return back();
+        return redirect()->route('gallery');
     }
 
     public function deleteCategory($id){

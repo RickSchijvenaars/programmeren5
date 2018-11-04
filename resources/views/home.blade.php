@@ -10,7 +10,7 @@
             <p class="lead text-muted"><i>"Photography is the story we fail to put into words."</i></p>
             <hr><br>
         </div>
-        <a class="btn-primary btn" href="{{route('gallery')}}">Album</a>
+        <a class="btn-primary btn" href="{{route('gallery')}}">Gallery</a>
         <a class="btn-secondary btn" href="{{route('upload')}}">Upload</a>
     </div>
 

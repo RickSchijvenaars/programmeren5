@@ -15,9 +15,14 @@
                 <p>{{$currentphoto->description}}</p>
 
                 @if (Auth::user() && Auth::user()->type == 'admin')
-                    <form method="POST" action="{{ route('admineditphoto', [ 'id' => $currentphoto->id])}}">
+                    <hr>
+                    <form class="d-inline-block" method="POST" action="{{ route('admineditphoto', [ 'id' => $currentphoto->id])}}">
                         {{ csrf_field() }}
                         <button type="submit" class="btn-primary btn">Edit</button>
+                    </form>
+                    <form class="d-inline-block" method="POST" action="{{ route('deletephoto', [ 'id' => $currentphoto->id])}}">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn-primary btn border-danger bg-danger">Delete</button>
                     </form>
                 @endif
 
